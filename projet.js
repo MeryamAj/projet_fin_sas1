@@ -211,6 +211,65 @@ function Afficher_les_trajets()
         i++;
     }
 }
+function Acheter_un_ticket()
+{
+    let Nom_du_passager = prompt("Enter your name : ");
+    let Identifiant_du_trajet = Number(prompt("Enter Identifian tdu trajet : "));
+    let addn = 0;
+    for(let i = 0; i < trips.length; i++)
+    {
+        if(Identifiant_du_trajet === trips[i].id)
+        {
+            if(trips[i].availableSeats > 0)
+            {
+                /*  id: 1,
+                passengerName: "Ahmed",
+                tripId: 3,
+                seatNumber: 1,
+                price: 90*/
+                tickets[tickets.length] = { 
+                    id : addn++,
+                    passengerName : Nom_du_passager,
+                    tripId : Identifiant_du_trajet,
+                    seatNumber : 1, //just for test
+                    price : trips[i].price,
+                }
+                trips[i].availableSeats--;
+                break;
+            }else
+            {
+                console.log("Train complet");
+            }
+
+
+        }
+        else
+        {
+            console.log("Trajet introuvable.")
+        }
+    }
+    
+}
+function Afficher_les_ticket()
+{
+    for(let i = 0; i < tickets.length; i++)
+        {
+            console.log(`Ticket #${tickets.id}`);
+            console.log9(`Passaager : ${tickets.passengerName}`);
+            for(let j = 0; j < trips.length; j++)
+                {
+                    if(trips[j].id == tickets.tripId)
+                        {
+                            console.log(`Trajet : ${trips[j].departure} --> ${trips[j].destination}`);
+                        }
+    }
+    console.log(`Place : ${tickets[i].seatNumber}`);
+    console.log(`prix : ${tickets[i].price} DH`);
+}
+
+}
+Afficher_les_ticket();
+Acheter_un_ticket();
 
 let choice = 0;
 /*do
