@@ -226,7 +226,7 @@ function Acheter_un_ticket()
     {
         if(trajet.availableSeats > 0)
         {
-         ticket = {
+        ticket = {
 
                     id : tickets.length + 1,
                     passengerName : Ndp,
@@ -235,12 +235,12 @@ function Acheter_un_ticket()
                     price : trajet.price,
                 }
                 trajet.availableSeats--;
+                tickets.push(ticket);
         }
         else
         {
             console.log("Train comple");
         }
-        tickets.push(ticket);
     }
     else
     {
@@ -260,10 +260,10 @@ function Afficher_les_ticket()
                             console.log(`Trajet : ${trips[j].departure} --> ${trips[j].destination}`);
                         }
                 }
-                 console.log(`Place : ${tickets[i].seatNumber}`);
-                 console.log(`prix : ${tickets[i].price} DH`);
+                console.log(`Place : ${tickets[i].seatNumber}`);
+                console.log(`prix : ${tickets[i].price} DH`);
     }
-   
+
 }
 function Annuler_un_ticket()
 {
@@ -285,7 +285,7 @@ function Annuler_un_ticket()
     else{
         console.log("Tickets is empty");
     }
-     
+
 }
 function Rechercher_un_ticket()
 {
@@ -294,7 +294,7 @@ function Rechercher_un_ticket()
 
     for(let i = 0; i < tickets.length; i++)
     {
-        if(NOdp == tickets[i].passengerName)
+        if(NOdp === tickets[i].passengerName)
         {
             console.log(`Ticket # ${tickets[i].id}`);
             console.log(`Passager : ${tickets[i].passengerName}`);
@@ -308,13 +308,11 @@ function Rechercher_un_ticket()
             }
             console.log(`Place : ${tickets[i].seatNumber}`);
             console.log(`Prix : ${tickets[i].price}`);
-        }
-        else
-        {
-            console.log("Ticket not found ")
+            return;
         }
 
     }
+    console.log("Ticket not found ");
 
 }
 
@@ -387,7 +385,11 @@ do
             Trier_les_trajets();
         break;
         default :
-        console.log("unvalide choice ")
+        if(choice != 0)
+        {
+            console.log("unvalide choice ");
+        }
+        
     }
 
 
