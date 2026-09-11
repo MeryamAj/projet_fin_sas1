@@ -88,6 +88,7 @@ const trips = [
         id: 10,
         departure: "Rabat",
         destination: "Kenitra",
+
         departureTime: "16:00",
         arrivalTime: "16:45",
         price: 30,
@@ -185,6 +186,7 @@ const trips = [
     }
 ];
 const tickets = [];
+
 function menu()
 {
     console.log("1 : Afficher les trajets");
@@ -212,9 +214,84 @@ function Afficher_les_trajets()
     }
 }
 
-let choice = 0;
-/*do
+function Acheter_un_ticket()
 {
+    
+    let Nom_du_passager = prompt("Enter your name : ");
+    let Identifiant_du_trajet = Number(prompt("Enter Identifian tdu trajet : "));
+    let trajet = trips.find(T => T.id === Identifiant_du_trajet);
+    let ticket;
+    if(trajet)
+    {
+        if(trajet.availableSeats > 0)
+        {
+
+        
+         ticket = {
+
+                    id : tickets.length + 1,
+                    passengerName : Nom_du_passager,
+                    tripId : Identifiant_du_trajet,
+                    seatNumber : trajet.availableSeats, //just for test
+                    price : trajet.price,
+                }
+        
+        }
+        else
+        {
+            console.log("Train comple");
+        }
+        tickets.push(ticket);
+    }
+    else
+    {
+        console.log("Trajet introuvable.");
+    }
+}
+function Afficher_les_ticket()
+{
+    for(let i = 0; i < tickets.length; i++)
+        {
+            console.log(`Ticket #${tickets[i].id}`);
+            console.log(`Passaager : ${tickets[i].passengerName}`);
+            for(let j = 0; j < trips.length; j++)
+                {
+                    if(trips[j].id === tickets[i].tripId)
+                        {
+                            console.log(`Trajet : ${trips[j].departure} --> ${trips[j].destination}`);
+                        }
+    }
+    console.log(`Place : ${tickets[i].seatNumber}`);
+    console.log(`prix : ${tickets[i].price} DH`);}
+
+}
+function Annuler_un_ticket()
+{
+    let  Identifiant_du_ticket = Number(prompt("Enter identifianr dy ticket : "));
+    let ticket = tickets.findIndex(T => T.id === Identifiant_du_ticket);
+    if(tickets.length > 0)
+    {
+
+    if(tickets[ticket])
+    {
+        tickets.splice(ticket,1);
+        trips[ticket].availableSeats++;
+    }
+    else
+    {
+        console.log("Ticket introuvable.");
+    }
+    }
+     
+}
+
+//Annuler_un_ticket()
+
+
+/*let choice = 0;
+do 
+{
+    menu();
     choice = Number(prompt("Choice : "));
     switch(choice)
     {
@@ -222,6 +299,7 @@ let choice = 0;
             Afficher_les_trajets();
         break;
         case 2 :
+            
 
         break;
         case 3 :
