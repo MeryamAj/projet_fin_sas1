@@ -226,8 +226,6 @@ function Acheter_un_ticket()
     {
         if(trajet.availableSeats > 0)
         {
-
-        
          ticket = {
 
                     id : tickets.length + 1,
@@ -236,7 +234,7 @@ function Acheter_un_ticket()
                     seatNumber : trajet.availableSeats, //just for test
                     price : trajet.price,
                 }
-        
+                trajet.availableSeats--;
         }
         else
         {
@@ -298,20 +296,18 @@ function Rechercher_un_ticket()
     {
         if(NOdp == tickets[i].passengerName)
         {
-            console.log(`${tickets[i].id}`);
-            console.log(`${tickets[i].passengerName}`);
+            console.log(`Ticket # ${tickets[i].id}`);
+            console.log(`Passager : ${tickets[i].passengerName}`);
             for(let j = 0; j < trips.length; j++)
             {
                 if(trips[j].id == tickets[i].tripId)
                 {
-                    console.log(`${trips[i].departure} -> ${trips[i].destination}`);
+                    console.log(`Trajet : ${trips[i].departure} -> ${trips[i].destination}`);
                 }
                 
             }
-            console.log(`${tickets[i].seatNumber}`);
-            console.log(`${tickets[i].price}`);
-            
-
+            console.log(`Place : ${tickets[i].seatNumber}`);
+            console.log(`Prix : ${tickets[i].price}`);
         }
         else
         {
@@ -322,7 +318,40 @@ function Rechercher_un_ticket()
 
 }
 
+function Filtrer_les_trajets()
+{
+    let ville = prompt("Enter Ville de départ : ");
+    let new_s = ville.toLowerCase();
+    for(let i = 0; i < trips.length; i++)
+    {
+        let str = (trips[i].departure).toLowerCase();
+        if(new_s === str)
+        {
+            console.log(`${trips[i].departure} -> ${trips[i].destination} : ${trips[i].price}`)
 
+        }
+    }
+
+}
+function Trier_les_trajets()
+{
+    let temp = 0;
+    for(let i = 0 ; i < trips.length ; i++)
+    {
+        for(let j = 0 ; j < trips.length - 1 - i ; j++)
+        {
+            if(trips[j].price > trips[j + 1].price)
+            {
+                temp = trips[j];
+                trips[j] = trips[j + 1];
+                trips[j + 1] = temp;
+            }
+        }
+        console.log(`${trips[i].departure} -> ${trips[i].destination} : ${trips[i].price}`);
+
+
+    }
+}
 
 let choice = 0;
 do 
@@ -351,10 +380,11 @@ do
 
         break;
         case 6 :
+            Filtrer_les_trajets();
 
         break;
         case 7 :
-
+            Trier_les_trajets();
         break;
         default :
         console.log("unvalide choice ")
