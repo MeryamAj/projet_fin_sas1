@@ -284,7 +284,8 @@ function Annuler_un_ticket()
     }
      
 }
-
+// Afficher_les_trajets()
+//Acheter_un_ticket()
 //Annuler_un_ticket()
 
 
